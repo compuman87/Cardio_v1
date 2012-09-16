@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">Cardio_v1</string>
+    <string name="track">Track</string>
+    <string name="speed">Speed</string>
+    <string name="trackVal"></string>
+    <string name="speedVal"></string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_display_message">My Message</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Start</string>
+    <string name="trackLabel">Select Track</string>
+    <string name="speedLabel">Select Speed</string>
+
+
+</resources>
