@@ -37,4 +37,22 @@
         android:layout_below="@+id/speedLabel"
         android:text="test" />
 
+     <TextView
+        android:id="@+id/yourSpeedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/actTrack"
+        android:layout_marginTop="54dp"
+        android:text="@string/yourSpeedLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+     
+     <TextView
+        android:id="@+id/yourSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/yourSpeedLabel"
+        android:text="test" />
+    
 </RelativeLayout>

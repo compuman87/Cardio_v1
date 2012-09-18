@@ -12,6 +12,7 @@
     <string name="button_send">Start</string>
     <string name="trackLabel">Select Track</string>
     <string name="speedLabel">Select Speed</string>
+    <string name="yourSpeedLabel">Your Speed</string>
 
 
 </resources>
