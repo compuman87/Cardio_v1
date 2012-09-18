@@ -10,6 +10,8 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.SoundPool;
+import android.media.AudioManager;
 
 
 public class DisplayMessageActivity extends Activity 
@@ -19,6 +21,11 @@ public class DisplayMessageActivity extends Activity
 	private LocationManager locationManager;
 	private String provider;
 	private String location1;
+	private SoundPool mySoundPool;
+	private AudioManager myAudioManager;
+	private int stream1 = 0;
+	private int stream2= 0;
+	
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,10 @@ public class DisplayMessageActivity extends Activity
         provider = locationManager.getBestProvider(criteria, false);
         Location location = locationManager.getLastKnownLocation(provider);
         
+        mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC,0);
+        myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        
+        
         
         if (location!=null)
         {
@@ -57,7 +68,7 @@ public class DisplayMessageActivity extends Activity
         }
         else
         {
-        
+        	textView3.setText("Not Connected to GPS");
         }
         
         
