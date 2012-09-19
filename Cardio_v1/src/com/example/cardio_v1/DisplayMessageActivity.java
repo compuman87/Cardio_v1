@@ -1,5 +1,8 @@
 package com.example.cardio_v1;
 
+import java.util.HashMap;
+
+import android.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -23,6 +26,7 @@ public class DisplayMessageActivity extends Activity
 	private String location1;
 	private SoundPool mySoundPool;
 	private AudioManager myAudioManager;
+	private HashMap<Integer, Integer> mySoundMap;
 	private int stream1 = 0;
 	private int stream2= 0;
 	
@@ -59,6 +63,14 @@ public class DisplayMessageActivity extends Activity
         
         mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC,0);
         myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        
+        mySoundMap = new HashMap();
+        
+        //mySoundMap.put(Sound1,mySoundPool.load(this, R.raw.));
+        
+        
+        
+        
         
         
         
