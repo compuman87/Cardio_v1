@@ -2,7 +2,7 @@ package com.example.cardio_v1;
 
 import java.util.HashMap;
 
-import android.R;
+import android.R.*;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
