@@ -16,7 +16,7 @@ import android.location.LocationManager;
 import android.media.SoundPool;
 import android.media.AudioManager;
 
-
+//test line to push -klip
 public class DisplayMessageActivity extends Activity 
 {
 	private String speed;
