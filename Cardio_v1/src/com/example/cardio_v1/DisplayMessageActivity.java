@@ -61,10 +61,10 @@ public class DisplayMessageActivity extends Activity
         provider = locationManager.getBestProvider(criteria, false);
         Location location = locationManager.getLastKnownLocation(provider);
         
-        mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC,0);
-        myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        
-        mySoundMap = new HashMap();
+//        mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC,0);
+//        myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+//        
+//        mySoundMap = new HashMap();
         
         //mySoundMap.put(Sound1,mySoundPool.load(this, R.raw.));
         
