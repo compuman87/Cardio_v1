@@ -29,8 +29,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.media.*;
 
-
-//test line to push -klip
 public class DisplayMessageActivity extends Activity 
 {
 //	private static final Integer SoundA = null;
@@ -88,6 +86,9 @@ public class DisplayMessageActivity extends Activity
         
         //textView.setTextSize(40);
         textView2.setText(message2);
+        
+        //Start GPS service -- (does nothing for now)
+        startService(new Intent(getBaseContext(), GPSservice.class));
     }
         
       
