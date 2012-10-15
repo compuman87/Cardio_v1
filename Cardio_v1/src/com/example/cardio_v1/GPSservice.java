@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Binder;
 import android.widget.Toast;
 import android.location.Location;
 import android.location.LocationManager;
@@ -15,11 +16,20 @@ public class GPSservice extends Service {
 	
 	private LocationManager lm;
 	private LocationListener ll;
+	private final IBinder bind = new gpsbinder();
+	private float speed;
+	
+	//Create inner Binder Class
+	public class gpsbinder extends Binder {
+		GPSservice getService() {
+			return GPSservice.this;
+		}
+	}
 	
 	@Override
 	//This method binds to DisplayMessageActivity
 	public IBinder onBind(Intent arg0) {
-		return null;
+		return bind;
 	}
 	
 	@Override
@@ -42,6 +52,10 @@ public class GPSservice extends Service {
 	private class LocListener implements LocationListener {
 		public void onLocationChanged(Location l) {
 			if (l != null) {
+				//To test getSpeed - UNCOMMENT the following line, run the program and send a location to the emulator and it should show up
+				//l.setSpeed(28); 
+				speed = l.getSpeed();
+			    
 				//To Test location changes --UNCOMMENT the following line and run
 				//Toast.makeText(getBaseContext(), "Location:  Lat: " + l.getLatitude() + "Long: " + l.getLongitude(), Toast.LENGTH_SHORT).show();
 				//Potentially good method to compute total distance traveled
@@ -54,11 +68,15 @@ public class GPSservice extends Service {
 		}
 		
 		public void onProviderEnabled(String provider) {
-			//
+			//Do nothing
 		}
 
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 			//Do nothing
 		}
+	}
+	
+	public float getCurrentSpeed() {
+			return speed;
 	}
 }

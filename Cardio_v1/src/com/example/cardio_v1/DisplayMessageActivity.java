@@ -29,6 +29,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.media.*;
 
+import android.os.IBinder;
+import android.content.ServiceConnection;
+import android.content.ComponentName;
+
 public class DisplayMessageActivity extends Activity 
 {
 //	private static final Integer SoundA = null;
@@ -54,19 +58,33 @@ public class DisplayMessageActivity extends Activity
 //	
 //	private Handler soundTask;
 //	float streamVolume;
+	float currentSpeed;
+	String cSpd;
 	private int count = 0;
+    private GPSservice sbinder;
+    Intent intent;
+    private Handler UIhandler = new Handler();
 	
-
-	
-
+    private ServiceConnection svcconnect = new ServiceConnection() {
+    	public void onServiceConnected(ComponentName name, IBinder svc) {
+    		sbinder = ((GPSservice.gpsbinder)svc).getService();
+    		startService(intent);
+    	}
+    	public void onServiceDisconnected(ComponentName name) {
+    		sbinder = null;
+    	}
+    };
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
-        Intent intent = getIntent();
-        
+        //intent = getIntent();
+        //use new intent
+        intent = new Intent(DisplayMessageActivity.this, GPSservice.class);
+        //Start/bind GPS service
+        bindService(intent, svcconnect, Context.BIND_AUTO_CREATE);
        
 
         String message1 = intent.getStringExtra(MainActivity.SEND_MESSAGE);
@@ -87,19 +105,37 @@ public class DisplayMessageActivity extends Activity
         //textView.setTextSize(40);
         textView2.setText(message2);
         
-        //Start GPS service -- (does nothing for now)
-        startService(new Intent(getBaseContext(), GPSservice.class));
+        //old---startService(new Intent(getBaseContext(), GPSservice.class));
+        cSpd = "initializing...";
+        textView3.setText(cSpd);           
     }
         
-      
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_display_message, menu);
-        
+        //Get updated GPS stats
+        gpsUpdate();
         looping(count);
         
         return true;
+    }
+    
+    public void gpsUpdate() {
+    	int delay = 1000;   	
+        	Timer timer = new Timer();
+        	timer.scheduleAtFixedRate(new TimerTask() {
+        		public void run() {
+       			     currentSpeed = sbinder.getCurrentSpeed();
+        			 cSpd = Float.toString(currentSpeed);
+        			 //Update Textview on the UI thread
+        			 UIhandler.post(new Runnable() {
+        				 public void run() {
+        					 textView3.setText(cSpd);
+        					 textView3.refreshDrawableState();
+        				 }
+        			 });
+        		}
+          	},0, delay);
     }
     
     
