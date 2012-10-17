@@ -116,7 +116,7 @@ public class DisplayMessageActivity extends Activity
         //Get updated GPS stats
         gpsUpdate();
         looping(count);
-        
+        //this is where it should crash currently
         return true;
     }
     

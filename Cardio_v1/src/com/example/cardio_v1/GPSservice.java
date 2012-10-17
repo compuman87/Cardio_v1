@@ -53,7 +53,8 @@ public class GPSservice extends Service {
 		public void onLocationChanged(Location l) {
 			if (l != null) {
 				//To test getSpeed - UNCOMMENT the following line, run the program and send a location to the emulator and it should show up
-				//l.setSpeed(28); 
+				//meters per second
+				l.setSpeed(28); 
 				speed = l.getSpeed();
 			    
 				//To Test location changes --UNCOMMENT the following line and run
