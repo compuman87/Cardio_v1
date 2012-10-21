@@ -107,7 +107,9 @@ public class DisplayMessageActivity extends Activity
         
         //old---startService(new Intent(getBaseContext(), GPSservice.class));
         cSpd = "initializing...";
-        textView3.setText(cSpd);           
+        textView3.setText(cSpd);        
+        
+        startService(new Intent(getBaseContext(), soundService.class));
     }
         
     @Override
@@ -115,7 +117,8 @@ public class DisplayMessageActivity extends Activity
         getMenuInflater().inflate(R.menu.activity_display_message, menu);
         //Get updated GPS stats
         gpsUpdate();
-        looping(count);
+      
+      
         //this is where it should crash currently
         return true;
     }
@@ -139,146 +142,15 @@ public class DisplayMessageActivity extends Activity
     }
     
     
-  synchronized public void audioLoop( Uri r)
-    {
-    	MediaPlayer mp;
-    	
-    	mp = MediaPlayer.create(getApplicationContext(),r);
-    	
-    	//mp.setAudioStreamType(AudioManager.MODE_NORMAL);
-    	mp.setOnCompletionListener(new OnCompletionListener()
-    	{
-    		public void onCompletion(MediaPlayer mp)
-    		{
-    			count++;
-    			looping(count);
-    		}
-    	});
-    	
-    	try {
-			mp.prepare();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	mp.start();
-    	
-    	mp = null;
-    }
-  
-  
-  private void looping(int n)
-  {
-	  Uri a = Uri.parse("android.resource://com.example.cardio_v1/" + R.raw.a);
-	  Uri b = Uri.parse("android.resource://com.example.cardio_v1/" + R.raw.b);
-	  Uri c = Uri.parse("android.resource://com.example.cardio_v1/" + R.raw.c);
-	  Uri d = Uri.parse("android.resource://com.example.cardio_v1/" + R.raw.d);
-	  ArrayList<Uri> myArray = new ArrayList<Uri>();
-	  
-	  myArray.add(a);
-	  myArray.add(b);
-	  myArray.add(c);
-	  myArray.add(d);
-	  
-	 audioLoop(myArray.get(n));
-	  
-	
-  }
     
+    public void onStop()
+    {
+    	super.onStop();
+    	stopService(new Intent(getBaseContext(), soundService.class));
+    }
 
     
- //   private void manyAudioLoop()
-//    {
-//    	streamVolume = myAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-//        streamVolume = streamVolume / myAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-//        
-//        if(loaded==true)
-//        {
-//        	int delay = 5000;
-//        	
-//        	
-//        	Timer timer = new Timer();
-//        	
-//        	
-//        	timer.scheduleAtFixedRate(new TimerTask()
-//        	{
-//        		public void run()
-//        		{
-//        		
-//        			playSound(j);
-//        			j++;
-//        			
-//        		}
-//        	},0, delay);
-//        	
-//        }
-//
-//    }
-//    
-//    
-//    public void playSound(int i)
-//    {
-//    	
-//    	switch (i)
-//    	{
-//    	case 1:
-//    		mySoundPool.play(mySoundMap.get(SoundA), streamVolume, streamVolume, 1, 0, 1f);
-//    	 break;
-//    	 
-//    	case 2:
-//    		mySoundPool.play(mySoundMap.get(SoundB), streamVolume, streamVolume, 1, 0, 1f);
-//    		break;
-//    		
-//    	case 3:
-//    		 mySoundPool.play(mySoundMap.get(SoundC), streamVolume, streamVolume, 1, 0, 1f);
-//    		 soundDone = true;
-//    		 break;
-//    		
-//    	}
-//    	
-//    	
-//    }
-//    
-//    @SuppressLint("UseSparseArrays")
-//	public void setAudio()
-//    { 
-//    	 myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-//    	 
-//    	 mySoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
-//        
-//         mySoundMap = new HashMap<Integer, Integer>();
-//        	 
-//         mySoundMap.put(SoundA,mySoundPool.load(this, R.raw.a,1));
-//         mySoundMap.put(SoundB,mySoundPool.load(this, R.raw.b,1));
-//        mySoundMap.put(SoundC,mySoundPool.load(this, R.raw.c,1));
-//        
-//       mySoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener()
-//       {
-//       	 
-//       	 public void onLoadComplete(SoundPool mySoundPool, int stream1, int status)
-//      	 {
-//       		 loaded = true;
-//       		 manyAudioLoop();
-//        	 }
-//        });
-//          
-//        
-//         mySoundMap.put(SoundD,mySoundPool.load(this, R.raw.d,1));
-//        mySoundMap.put(SoundE,mySoundPool.load(this, R.raw.e,1)); 
-//   }
-//    
-//    
-   
     
-//    private void locationChanged(Location location)
-//    {
-//    	speed = Float.toString(location.getSpeed());
-//    	textView3.setText(speed);
-//    	
-//    }
+  
 }
 

@@ -47,6 +47,10 @@ public final class R {
         public static final int c=0x7f040002;
         public static final int d=0x7f040003;
         public static final int e=0x7f040004;
+        public static final int f=0x7f040005;
+        public static final int g=0x7f040006;
+        public static final int h=0x7f040007;
+        public static final int track=0x7f040008;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
