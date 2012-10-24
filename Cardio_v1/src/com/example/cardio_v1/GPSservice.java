@@ -74,9 +74,10 @@ public class GPSservice extends Service {
 				//Potentially good method to compute total distance traveled
 				//l.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results)
 				makeUseOfNewLocation(l);
-				double metersPerSec =l.getSpeed();
-				double milesPerHour = metersPerSec*2.2369;
-				speed = (float) milesPerHour;
+				//double metersPerSec =l.getSpeed();
+				//double milesPerHour = metersPerSec*2.2369;
+				//speed = (float) milesPerHour;
+				speed = l.getSpeed();
 			}
 		}
 		public void makeUseOfNewLocation(Location location){
@@ -93,33 +94,19 @@ public class GPSservice extends Service {
     			else{
     				endLong = location.getLongitude();
     				endLat = location.getLatitude();
-    				float previoustime = time/(1000*60*60);
+    	//			float previoustime = time/(1000*60*60);
     				float preTime = time/(1000);
     				time = time+1000;
-    				float currenttime = time/(1000*60*60);
+    	//			float currenttime = time/(1000*60*60);
     				float curTime = time/(1000);
     				Location dest = location;
     				//float disTo = start.distanceTo(dest);
     			/**distance divided by time get time in hours*/
     				Location.distanceBetween(startLat, startLong, endLat, endLong, result);
-    			//System.out.println(start.getLatitude(),start.getLongitude(), end.getLatitude() , end.getLongitude());
-    				//System.out.println("disTo.................................." + disTo);
-    				//for(int i = 0; i <result.length-1;i++){
-    				//if(result[i] != null){
-//    					System.out.println("time hours" + currenttime + " result " +result[0]+ " conversion "+ (result[0]/1609.3));
-    					//System.out.println("i " + i + " result " +result[i]);
-    				//}
-    				//}
-    				//System.out.printf("time hours %f \n",currenttime);
-    				//result .001/1sec or .00027 hours
-    				double currentSpeed = (result[0]/1609.3)/((currenttime-previoustime));
-    				//speed = (float) currentSpeed;
-    				//location.setSpeed(speed); 
-    				//System.out.println("secs" + (curTime-preTime) + " result " +result[0]+ " conversion "+ (result[0]/(curTime-preTime)));
-    				speed = result[0]/(curTime-preTime);
-    				location.setSpeed(speed);
-    				//float metersPerSecond = result[0]/(time/1000);
-    				//location.setSpeed(metersPerSecond);
+    				
+    				float curSpeed = result[0]/(curTime-preTime);
+    				location.setSpeed(curSpeed);
+    			
     			//sets the starting position set to the ending positions
     				start = dest;
     				startLong = location.getLongitude();
@@ -142,6 +129,9 @@ public class GPSservice extends Service {
 	}
 	
 	public float getCurrentSpeed() {
-			return speed;
+		float convert = (float)2.2369;
+		float milesPerHour = speed*convert;
+		speed = milesPerHour;
+		return speed;
 	}
 }
