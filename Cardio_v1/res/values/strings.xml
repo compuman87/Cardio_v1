@@ -2,7 +2,7 @@
 
     <string name="app_name">Cardio_v1</string>
     <string name="track">Track</string>
-    <string name="speed">Speed</string>
+    <string name="speed">Minimum Speed</string>
     <string name="trackVal"></string>
     <string name="speedVal"></string>
     <string name="menu_settings">Settings</string>

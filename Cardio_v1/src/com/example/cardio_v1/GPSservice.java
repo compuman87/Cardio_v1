@@ -62,17 +62,9 @@ public class GPSservice extends Service {
 	
 	private class LocListener implements LocationListener {
 		public void onLocationChanged(Location l) {
-			if (l != null) {
-				
-				//To test getSpeed - UNCOMMENT the following line, run the program and send a location to the emulator and it should show up
-				//meters per second
-				//l.setSpeed(28); 
-				//speed = l.getSpeed();
-			    
+			if (l != null) {	    
 				//To Test location changes --UNCOMMENT the following line and run
 				//Toast.makeText(getBaseContext(), "Location:  Lat: " + l.getLatitude() + "Long: " + l.getLongitude(), Toast.LENGTH_SHORT).show();
-				//Potentially good method to compute total distance traveled
-				//l.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results)
 				makeUseOfNewLocation(l);
 				//double metersPerSec =l.getSpeed();
 				//double milesPerHour = metersPerSec*2.2369;
@@ -129,8 +121,10 @@ public class GPSservice extends Service {
 	}
 	
 	public float getCurrentSpeed() {
+		//Convert m/s to mph
+		float milesPerHour = 0;
 		float convert = (float)2.2369;
-		float milesPerHour = speed*convert;
+		milesPerHour = speed*convert;
 		speed = milesPerHour;
 		return speed;
 	}

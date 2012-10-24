@@ -15,10 +15,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.widget.TextView;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.SoundPool;
@@ -119,14 +115,11 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         startService(new Intent(getBaseContext(), soundService.class));
         //Get updated GPS stats
         gpsUpdate();
-      
-      
-        //this is where it should crash currently
+        
         return true;
     }
    
-    public void onProgressChanged(SeekBar seekBar, int progress,
-			boolean fromUser) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 		
 		volume.setText(String.valueOf(progress));
 
