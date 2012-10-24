@@ -82,7 +82,7 @@ public class GPSservice extends Service {
 		}
 		public void makeUseOfNewLocation(Location location){
     		count++;
-    		if(count>3){
+    		if(count>6){
     			float[] result = new float[3];
     			if(startLong == 0 && startLat == 0){
     				//array[0] = location.getLongitude();

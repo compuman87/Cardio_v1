@@ -34,7 +34,7 @@ import android.os.IBinder;
 import android.content.ServiceConnection;
 import android.content.ComponentName;
 
-public class DisplayMessageActivity extends Activity 
+public class DisplayMessageActivity extends Activity implements OnSeekBarChangeListener
 {
 
 	private String speed;
@@ -104,10 +104,10 @@ public class DisplayMessageActivity extends Activity
         
         
         
-        volControl.setOnSeekBarChangeListener((OnSeekBarChangeListener) this);
+       volControl.setOnSeekBarChangeListener(this);
         
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
-        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+       this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
         
        
     }
