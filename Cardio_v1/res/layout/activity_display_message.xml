@@ -54,5 +54,24 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/yourSpeedLabel"
         android:text="test" />
+     <SeekBar
+         android:id="@+id/volCont"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/yourSpeed"
+         android:layout_marginTop="90dp" 
+         android:max="100"
+         android:progress="0"/>
+
+     <TextView
+         android:id="@+id/volume"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/yourSpeed"
+         android:layout_marginLeft="14dp"
+         android:layout_marginTop="30dp"
+         android:layout_toRightOf="@+id/yourSpeedLabel"
+         android:text="test" />
     
 </RelativeLayout>

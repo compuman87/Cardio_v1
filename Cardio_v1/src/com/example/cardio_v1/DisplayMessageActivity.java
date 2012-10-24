@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
-
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,35 +36,23 @@ import android.content.ComponentName;
 
 public class DisplayMessageActivity extends Activity 
 {
-//	private static final Integer SoundA = null;
-//	private static final Integer SoundB = null;
-//	private static final Integer SoundC = null;
-//	private static final Integer SoundD = null;
-//	private static final Integer SoundE = null;
+
 	private String speed;
 	private TextView textView3;
-//	private LocationManager locationManager;
-//	private String provider;
-//	private String location1;
-//	private SoundPool mySoundPool;
-//	private AudioManager myAudioManager;
-//	private HashMap<Integer, Integer> mySoundMap;
-//	private int stream1 = 0;
-//	private int stream2= 0;
-//	private int stream3= 0;
-//	private int stream4= 0;
-//	private int stream5= 0;
-//	private boolean loaded = false;
-//	boolean soundDone = false;
-//	
-//	private Handler soundTask;
-//	float streamVolume;
+
 	float currentSpeed;
 	String cSpd;
 	private int count = 0;
     private GPSservice sbinder;
     Intent intent;
     private Handler UIhandler = new Handler();
+    
+    SeekBar volControl;
+	
+	TextView volume;
+	
+	AudioManager am;
+
 	
     private ServiceConnection svcconnect = new ServiceConnection() {
     	public void onServiceConnected(ComponentName name, IBinder svc) {
@@ -80,7 +69,7 @@ public class DisplayMessageActivity extends Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
-        //intent = getIntent();
+        intent = getIntent();
         //use new intent
         intent = new Intent(DisplayMessageActivity.this, GPSservice.class);
         //Start/bind GPS service
@@ -107,14 +96,27 @@ public class DisplayMessageActivity extends Activity
         
         //old---startService(new Intent(getBaseContext(), GPSservice.class));
         cSpd = "initializing...";
-        textView3.setText(cSpd);        
+        textView3.setText(cSpd);     
         
-        startService(new Intent(getBaseContext(), soundService.class));
+        
+        
+        volControl = (SeekBar)findViewById(R.id.volCont);
+        
+        
+        
+        volControl.setOnSeekBarChangeListener((OnSeekBarChangeListener) this);
+        
+        am = (AudioManager) getSystemService(AUDIO_SERVICE);
+        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        
+       
     }
         
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_display_message, menu);
+        
+        startService(new Intent(getBaseContext(), soundService.class));
         //Get updated GPS stats
         gpsUpdate();
       
@@ -122,6 +124,27 @@ public class DisplayMessageActivity extends Activity
         //this is where it should crash currently
         return true;
     }
+   
+    public void onProgressChanged(SeekBar seekBar, int progress,
+			boolean fromUser) {
+		
+		volume.setText(String.valueOf(progress));
+
+		am.setStreamVolume(AudioManager.STREAM_MUSIC, progress,0);
+	}
+    
+    public void onStartTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void onStopTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+    
     
     public void gpsUpdate() {
     	int delay = 1000;   	
