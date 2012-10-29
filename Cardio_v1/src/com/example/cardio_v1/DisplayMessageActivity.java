@@ -43,6 +43,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
 	
 	private int count = 0;
     private GPSservice sbinder;
+    private soundService abinder;
     Intent intent;
     private Handler UIhandler = new Handler();
     
@@ -56,6 +57,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
     private ServiceConnection svcconnect = new ServiceConnection() {
     	public void onServiceConnected(ComponentName name, IBinder svc) {
     		sbinder = ((GPSservice.gpsbinder)svc).getService();
+    		
     		startService(intent);
     	}
     	public void onServiceDisconnected(ComponentName name) {
@@ -63,6 +65,18 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
     	}
     };
 
+    
+//    private ServiceConnection sndSrvc = new ServiceConnection() {
+//    	public void onServiceConnected(ComponentName name, IBinder svc) {
+//    		
+//    		abinder = ((soundService.soundBinder)svc).getService();
+//    		
+//    		startService(intent);
+//    	}
+//    	public void onServiceDisconnected(ComponentName name) {
+//    		abinder = null;
+//    	}
+//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +87,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         intent = new Intent(DisplayMessageActivity.this, GPSservice.class);
         //Start/bind GPS service
         bindService(intent, svcconnect, Context.BIND_AUTO_CREATE);
-       
+       // bindService(intent, sndSrvc, Context.BIND_AUTO_CREATE);
 
         String message1 = intent.getStringExtra(MainActivity.SEND_MESSAGE);
         String message2 = intent.getStringExtra(MainActivity.SEND_MESSAGE2);
@@ -120,7 +134,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
    
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 		
-		volume.setText(String.valueOf(progress));
+		//volume.setText(String.valueOf(progress));
 
 		am.setStreamVolume(AudioManager.STREAM_MUSIC, progress,0);
 	}
