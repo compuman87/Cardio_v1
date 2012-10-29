@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Binder;
+import android.util.Log;
 import android.widget.Toast;
 import android.location.Location;
 import android.location.LocationManager;
@@ -18,14 +19,18 @@ public class GPSservice extends Service {
 	private LocationListener ll;
 	private final IBinder bind = new gpsbinder();
 	private float speed;
-	//startime is always zero
-	long starttime = 0;
+	private float totalDist = 0;
+	private float[] distArray = new float[2];
+	Location prev;
+	
+	long starttime = 0; //startime is always zero
 	float time = starttime;
 	double startLong = 0;
 	double startLat = 0;
 	double endLong;
 	double endLat;
 	int count = 0;
+	int count2 = 0;
 	//starting location is null so that it can be set by the first location 
 	//sent to the location manager
 	Location start = null;
@@ -70,6 +75,7 @@ public class GPSservice extends Service {
 				//double milesPerHour = metersPerSec*2.2369;
 				//speed = (float) milesPerHour;
 				speed = l.getSpeed();
+				calculateTotalDist(l);
 			}
 		}
 		public void makeUseOfNewLocation(Location location){
@@ -127,5 +133,25 @@ public class GPSservice extends Service {
 		milesPerHour = speed*convert;
 		speed = milesPerHour;
 		return speed;
+	}
+	
+	private void calculateTotalDist(Location l) {
+		count2++;
+		if (count2 > 6) {
+		if (prev !=null) {
+			Location.distanceBetween(prev.getLatitude(), prev.getLongitude(), l.getLatitude(), l.getLongitude(), distArray);
+			//distArray[0]=distance, [1]=bearing
+			totalDist = totalDist + distArray[0];
+			//Log.d(null, Float.toString(totalDist));
+			prev = l;
+		} else {
+			prev = l;
+			totalDist = 0;
+		}
+		}
+	}
+	
+	public float getTotalDistance() {
+		return totalDist;
 	}
 }

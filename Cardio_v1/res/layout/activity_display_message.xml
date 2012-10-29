@@ -73,5 +73,23 @@
          android:layout_marginTop="30dp"
          android:layout_toRightOf="@+id/yourSpeedLabel"
          android:text="test" />
+
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/volCont"
+         android:layout_marginTop="26dp"
+         android:text="Total Distance Traveled"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+     <TextView
+         android:id="@+id/distView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/textView1"
+         android:text="dist" />
     
 </RelativeLayout>

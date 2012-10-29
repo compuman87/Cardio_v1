@@ -13,6 +13,7 @@
     <string name="trackLabel">Select Track</string>
     <string name="speedLabel">Select Speed</string>
     <string name="yourSpeedLabel">Your Speed</string>
+    <string name="dist">distance</string>
 
 
 </resources>

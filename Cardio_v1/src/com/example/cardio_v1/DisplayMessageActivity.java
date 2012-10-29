@@ -35,9 +35,12 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
 
 	private String speed;
 	private TextView textView3;
+	private TextView distance;
 
 	float currentSpeed;
 	String cSpd;
+	float tDist;
+	
 	private int count = 0;
     private GPSservice sbinder;
     Intent intent;
@@ -80,19 +83,15 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         TextView textView1 = (TextView) findViewById(R.id.actSpeed);
         TextView textView2 = (TextView) findViewById(R.id.actTrack);
         textView3 = (TextView) findViewById(R.id.yourSpeed);
-        
-        		
-        
+        distance = (TextView) findViewById(R.id.distView1);
         
         //textView.setTextSize(40);
         textView1.setText(message1);
-        
         //textView.setTextSize(40);
         textView2.setText(message2);
-        
-        //old---startService(new Intent(getBaseContext(), GPSservice.class));
         cSpd = "initializing...";
-        textView3.setText(cSpd);     
+        textView3.setText(cSpd);
+        distance.setText("initializing...");
         
         
         
@@ -146,11 +145,14 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         		public void run() {
        			     currentSpeed = sbinder.getCurrentSpeed();
         			 cSpd = Float.toString(currentSpeed);
+        			 tDist = sbinder.getTotalDistance();
         			 //Update Textview on the UI thread
         			 UIhandler.post(new Runnable() {
         				 public void run() {
-        					 textView3.setText(cSpd);
+        					 textView3.setText(cSpd + " mph");
         					 textView3.refreshDrawableState();
+        					 distance.setText(Float.toString(tDist) + " meters");
+        					 distance.refreshDrawableState();
         				 }
         			 });
         		}
@@ -169,4 +171,3 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
     
   
 }
-
