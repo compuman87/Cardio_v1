@@ -43,7 +43,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
 	
 	private int count = 0;
     private GPSservice sbinder;
-    private soundService abinder;
+   // private soundService abinder;
     Intent intent;
     private Handler UIhandler = new Handler();
     
@@ -84,6 +84,8 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         setContentView(R.layout.activity_display_message);
         intent = getIntent();
         //use new intent
+        
+      
         intent = new Intent(DisplayMessageActivity.this, GPSservice.class);
         //Start/bind GPS service
         bindService(intent, svcconnect, Context.BIND_AUTO_CREATE);
@@ -117,7 +119,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        
+       //startService(new Intent(getBaseContext(), soundService.class));
        
     }
         
@@ -127,6 +129,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         
         startService(new Intent(getBaseContext(), soundService.class));
         //Get updated GPS stats
+        
         gpsUpdate();
         
         return true;
