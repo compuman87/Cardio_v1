@@ -125,7 +125,7 @@ public class GPSservice extends Service {
 			//Do nothing
 		}
 	}
-	
+	//Get Current Speed -- return in MPH
 	public float getCurrentSpeed() {
 		//Convert m/s to mph
 		float milesPerHour = 0;
@@ -150,8 +150,11 @@ public class GPSservice extends Service {
 		}
 		}
 	}
-	
+	//Get Total Distance -- Return in Miles
 	public float getTotalDistance() {
-		return totalDist;
+		float miles = 0;
+		float convert = (float)0.000621371;
+		miles = totalDist*convert;
+		return miles;
 	}
 }
