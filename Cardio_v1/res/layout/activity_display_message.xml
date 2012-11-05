@@ -5,91 +5,92 @@
     tools:context=".DisplayMessageActivity" >
 
     <TextView
-        android:id="@+id/trackLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/track"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/speedLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/trackLabel"
-        android:layout_marginTop="54dp"
-        android:text="@string/speed"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/actSpeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/trackLabel"
-        android:text="test" />
-
-    <TextView
-        android:id="@+id/actTrack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/speedLabel"
-        android:text="test" />
-
-     <TextView
         android:id="@+id/yourSpeedLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/actTrack"
         android:layout_marginTop="54dp"
         android:text="@string/yourSpeedLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-     
-     <TextView
+
+    <TextView
         android:id="@+id/yourSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/yourSpeedLabel"
         android:text="test" />
-     <SeekBar
-         android:id="@+id/volCont"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/yourSpeed"
-         android:layout_marginTop="90dp" 
-         android:max="100"
-         android:progress="0"/>
 
-     <TextView
-         android:id="@+id/volume"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/yourSpeed"
-         android:layout_marginLeft="14dp"
-         android:layout_marginTop="30dp"
-         android:layout_toRightOf="@+id/yourSpeedLabel"
-         android:text="test" />
+    <SeekBar
+        android:id="@+id/volCont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/yourSpeed"
+        android:layout_marginTop="90dp"
+        android:max="100"
+        android:progress="0" />
 
-     <TextView
-         android:id="@+id/textView1"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/volCont"
-         android:layout_marginTop="26dp"
-         android:text="Total Distance Traveled"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/volCont"
+        android:layout_marginTop="26dp"
+        android:text="Total Distance Traveled"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-     <TextView
-         android:id="@+id/distView1"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/textView1"
-         android:text="dist" />
-    
+    <TextView
+        android:id="@+id/distView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:text="dist" />
+
+    <TextView
+        android:id="@+id/volume"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/yourSpeed"
+        android:layout_marginTop="50dp"
+        android:text="test" />
+
+    <TextView
+        android:id="@+id/actSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/yourSpeed"
+        android:layout_alignBottom="@+id/yourSpeed"
+        android:text="test" />
+
+    <TextView
+        android:id="@+id/speedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/speed"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/actMinSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/speedLabel"
+        android:text="text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:text="Sop" />
+
 </RelativeLayout>

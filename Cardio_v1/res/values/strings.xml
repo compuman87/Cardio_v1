@@ -11,7 +11,7 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Start</string>
     <string name="trackLabel">Select Track</string>
-    <string name="speedLabel">Select Speed</string>
+    <string name="speedLabel">Select Minimum Speed</string>
     <string name="yourSpeedLabel">Your Speed</string>
     <string name="dist">distance</string>
 

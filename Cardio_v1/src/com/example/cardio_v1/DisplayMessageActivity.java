@@ -32,10 +32,11 @@ import android.content.ComponentName;
 
 public class DisplayMessageActivity extends Activity implements OnSeekBarChangeListener
 {
-
-	private String speed;
+	private int speed;
 	private TextView textView3;
+	//private TextView textViewVol;
 	private TextView distance;
+	private TextView minSpeed;
 
 	float currentSpeed;
 	float totalDist;
@@ -53,7 +54,6 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
 	TextView volume;
 	
 	AudioManager am;
-
 	
     private ServiceConnection svcconnect = new ServiceConnection() {
     	public void onServiceConnected(ComponentName name, IBinder svc) {
@@ -98,14 +98,16 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         //TextView textView = new TextView(this);
         //TextView textView2 = new TextView(this);
         TextView textView1 = (TextView) findViewById(R.id.actSpeed);
-        TextView textView2 = (TextView) findViewById(R.id.actTrack);
+        minSpeed = (TextView) findViewById(R.id.actMinSpeed);
         textView3 = (TextView) findViewById(R.id.yourSpeed);
         distance = (TextView) findViewById(R.id.distView1);
-        
+   //     textViewVol = (TextView) findViewById(R.id.yourVol);
         //textView.setTextSize(40);
         textView1.setText(message1);
+        minSpeed.setText(message2);
         //textView.setTextSize(40);
-        textView2.setText(message2);
+   //     textView2.setText(message2);
+      //  textViewVol.setText("Volume");
         cSpd = "initializing...";
         textView3.setText(cSpd);
         distance.setText("initializing...");
@@ -162,6 +164,9 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         	timer.scheduleAtFixedRate(new TimerTask() {
         		public void run() {
        			     currentSpeed = sbinder.getCurrentSpeed();
+       			     
+       			     speed = (int)currentSpeed;
+       			 //    onSpeedChange(speed);
         			 cSpd = Float.toString(currentSpeed);
         			 if (cSpd.length() >4) cSpd = cSpd.substring(0, 4);
         			 totalDist = sbinder.getTotalDistance();
@@ -187,9 +192,30 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
     {
     	super.onStop();
     	stopService(new Intent(getBaseContext(), soundService.class));
+    	stopService(new Intent(getBaseContext(), GPSservice.class));
     }
-
+    public void onSpeedChange(int speed){
+    	//if(speed > minSpeed+.5) vol = 0
+    	//if(speed < mindpseed) vol = 100
+    	//else{ curvolume = speed-min * 200
+    	//volume = maxvol - curVol;
+    	int s;
+    	double minSpeed = 3.5;
+    	if(speed> minSpeed+.5){
+    		s = 0;
+    	
+    	//	String ss = Double.toString(s);
+    	}else if(speed<minSpeed){
+    		s = 100;
+    	}else{
+    		int curVolume = (int)(speed - minSpeed) *200;
+    		s = 100 - curVolume;
+    	}
+    	// textViewVol.setText("volume");
+		 //textViewVol.refreshDrawableState();
+    	//speed = speed*10;
+    	am.setStreamVolume(AudioManager.STREAM_MUSIC, s ,0);
     
-    
+    }
   
 }

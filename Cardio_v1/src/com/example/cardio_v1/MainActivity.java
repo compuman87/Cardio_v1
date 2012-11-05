@@ -31,7 +31,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         spinnerCount+=0;
-        createSpinner1();
+ //       createSpinner1();
         createSpinner2();
     }
 
@@ -57,6 +57,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener
     }
     
     //method to create the first spinner using the zombieTracks array in spinnerResources
+    /*
     public void createSpinner1()
     {
     	Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -66,6 +67,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener
     	spinner1.setAdapter(adapter);
     
     }
+    */
     //method to create the second spinner using the minSpeed array in spinnerResources
     public void createSpinner2()
     {
