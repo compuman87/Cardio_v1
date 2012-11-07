@@ -30,6 +30,8 @@ import android.os.IBinder;
 import android.content.ServiceConnection;
 import android.content.ComponentName;
 
+import android.util.Log;
+
 public class DisplayMessageActivity extends Activity implements OnSeekBarChangeListener
 {
 	private int speed;
@@ -54,6 +56,8 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
 	TextView volume;
 	
 	AudioManager am;
+	
+	String message2;
 	
     private ServiceConnection svcconnect = new ServiceConnection() {
     	public void onServiceConnected(ComponentName name, IBinder svc) {
@@ -93,7 +97,10 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
        // bindService(intent, sndSrvc, Context.BIND_AUTO_CREATE);
 
         String message1 = intent.getStringExtra(MainActivity.SEND_MESSAGE);
-        String message2 = intent.getStringExtra(MainActivity.SEND_MESSAGE2);
+        message2 = intent.getStringExtra(MainActivity.SEND_MESSAGE2);
+        String message3 = intent.getStringExtra(MainActivity.minSpeedr);
+       
+       // Log.d(null,message2);
         
         //TextView textView = new TextView(this);
         //TextView textView2 = new TextView(this);
@@ -101,10 +108,12 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         minSpeed = (TextView) findViewById(R.id.actMinSpeed);
         textView3 = (TextView) findViewById(R.id.yourSpeed);
         distance = (TextView) findViewById(R.id.distView1);
-   //     textViewVol = (TextView) findViewById(R.id.yourVol);
+        
+       
+       // textViewVol = (TextView) findViewById(R.id.yourVol);
         //textView.setTextSize(40);
         textView1.setText(message1);
-        minSpeed.setText(message2);
+        minSpeed.setText(message1);
         //textView.setTextSize(40);
    //     textView2.setText(message2);
       //  textViewVol.setText("Volume");
@@ -113,12 +122,11 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         distance.setText("initializing...");
         
         
-        
         volControl = (SeekBar)findViewById(R.id.volCont);
         
         
         
-       volControl.setOnSeekBarChangeListener(this);
+        volControl.setOnSeekBarChangeListener(this);
         
         am = (AudioManager) getSystemService(AUDIO_SERVICE);
        this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -133,7 +141,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         startService(new Intent(getBaseContext(), soundService.class));
         //Get updated GPS stats
         
-        gpsUpdate();
+        gpsUpdate(message2);
         
         return true;
     }
@@ -158,7 +166,8 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
 	}
     
     
-    public void gpsUpdate() {
+    public void gpsUpdate(String msg) {
+    	final String MSGS = msg;
     	int delay = 1000;   	
         	Timer timer = new Timer();
         	timer.scheduleAtFixedRate(new TimerTask() {
@@ -176,6 +185,10 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         			 //Update Textview on the UI thread
         			 UIhandler.post(new Runnable() {
         				 public void run() {
+        					 //textViewVol.setText("volume");
+        					 //textViewVol.refreshDrawableState();
+        					 minSpeed.setText("minimum speed");
+        					 minSpeed.refreshDrawableState();
         					 textView3.setText(cSpd + " mph");
         					 textView3.refreshDrawableState();
         					 distance.setText(tDist + " miles");

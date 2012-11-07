@@ -15,14 +15,17 @@ import android.widget.Spinner;
 public class MainActivity extends Activity implements OnItemSelectedListener 
 {
 	//Doesn't do much
-	 public final static String SEND_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	 public final static String SEND_MESSAGE = "com.example.cardio_v1.MESSAGE";
 	 public final static String SEND_MESSAGE2 = "com.example.myfirstapp.MESSAGE1";
+	 public final static String minSpeedr = "com.example.myfirstapp.MESSAGE3";
 	 // container to hold the selection of the first spinner
 	 public String message1 = "Test";
 	 //container to hold the selection of the second spinner
 	 public String message2 = "Test";
 	 
 	 public int spinnerCount = 0;
+	 
+	 public String message3 = "test";
 
 
     @Override
@@ -51,6 +54,7 @@ public class MainActivity extends Activity implements OnItemSelectedListener
     	//String message = editText.getText().toString();
     	intent.putExtra(SEND_MESSAGE, message1);
     	intent.putExtra(SEND_MESSAGE2, message2);
+    	intent.putExtra(minSpeedr, message3);
     	startActivity(intent);
 
     	
@@ -79,22 +83,22 @@ public class MainActivity extends Activity implements OnItemSelectedListener
     }
     public void onItemSelected(AdapterView<?> parent,View view,int pos, long id)
     {
-    	spinnerCount++;
+//    	spinnerCount++;
+//    	
+//    	if(spinnerCount == 3)
+//    	{
+//    		message1 = parent.getItemAtPosition(pos).toString();
+//    		spinnerCount++;
+//    	}
+//    	
+//    	
+//    	else if (spinnerCount > 3) 
+//    	{
+//    		message2 = parent.getItemAtPosition(pos).toString();
+//    	}
+//    	
     	
-    	if(spinnerCount == 3)
-    	{
-    		message1 = parent.getItemAtPosition(pos).toString();
-    		spinnerCount++;
-    	}
-    	
-    	
-    	else if (spinnerCount > 3) 
-    	{
-    		message2 = parent.getItemAtPosition(pos).toString();
-    	}
-    	
-    	
-    	
+    	message1 = parent.getItemAtPosition(pos).toString();
     	
     }
     public void onNothingSelected(AdapterView<?> parent)
