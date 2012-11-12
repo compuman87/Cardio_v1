@@ -89,16 +89,16 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         setContentView(R.layout.activity_display_message);
         intent = getIntent();
         //use new intent
-        
+        String message1 = intent.getStringExtra(MainActivity.SEND_MESSAGE);
+        message2 = intent.getStringExtra(MainActivity.SEND_MESSAGE2);
+        String message3 = intent.getStringExtra(MainActivity.minSpeedr);
       
         intent = new Intent(DisplayMessageActivity.this, GPSservice.class);
         //Start/bind GPS service
         bindService(intent, svcconnect, Context.BIND_AUTO_CREATE);
        // bindService(intent, sndSrvc, Context.BIND_AUTO_CREATE);
 
-        String message1 = intent.getStringExtra(MainActivity.SEND_MESSAGE);
-        message2 = intent.getStringExtra(MainActivity.SEND_MESSAGE2);
-        String message3 = intent.getStringExtra(MainActivity.minSpeedr);
+        
        
        // Log.d(null,message2);
         
@@ -187,8 +187,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         				 public void run() {
         					 //textViewVol.setText("volume");
         					 //textViewVol.refreshDrawableState();
-        					 minSpeed.setText("minimum speed");
-        					 minSpeed.refreshDrawableState();
+        					
         					 textView3.setText(cSpd + " mph");
         					 textView3.refreshDrawableState();
         					 distance.setText(tDist + " miles");
