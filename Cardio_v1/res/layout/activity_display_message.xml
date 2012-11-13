@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/yourSpeedLabel"
-        android:text="test" />
+        android:text="" />
 
     <SeekBar
         android:id="@+id/volCont"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/yourSpeed"
         android:layout_alignBottom="@+id/yourSpeed"
-        android:text="test" />
+        android:text="" />
 
     <TextView
         android:id="@+id/speedLabel"

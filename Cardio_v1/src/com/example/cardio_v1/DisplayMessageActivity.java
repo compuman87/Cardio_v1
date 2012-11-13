@@ -2,8 +2,6 @@ package com.example.cardio_v1;
 
 import java.io.IOException;
 import java.util.HashMap;
-
-
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.net.Uri;
@@ -112,7 +110,7 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
        
        // textViewVol = (TextView) findViewById(R.id.yourVol);
         //textView.setTextSize(40);
-        textView1.setText(message1);
+      //  textView1.setText(message1);
         minSpeed.setText(message1);
         //textView.setTextSize(40);
    //     textView2.setText(message2);
@@ -197,7 +195,6 @@ public class DisplayMessageActivity extends Activity implements OnSeekBarChangeL
         		}
           	},0, delay);
     }
-    
     
     
     public void onStop()

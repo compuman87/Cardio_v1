@@ -42,7 +42,6 @@ public class MainActivity extends Activity implements OnItemSelectedListener
     public boolean onCreateOptionsMenu(Menu menu) 
     {
     	
-    	
     	getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
@@ -57,7 +56,6 @@ public class MainActivity extends Activity implements OnItemSelectedListener
     	intent.putExtra(minSpeedr, message3);
     	startActivity(intent);
 
-    	
     }
     
     //method to create the first spinner using the zombieTracks array in spinnerResources
